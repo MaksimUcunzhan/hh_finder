@@ -1,0 +1,30 @@
+{% extends 'search/base.html' %}
+
+{% block title %}Сайт{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>Сайт</h1>
+        <nav>
+            <a href="{% url 'search:search' %}">Начать</a>
+            <a href="{% url 'users:login' %}">Войти</a>
+        </nav>
+    </header>
+    <section class="main-content">
+        <div class="search-container">
+            <h2>Поиск профессии:</h2>
+        </div>
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Профессия">
+                <span class="clear-button" onclick="clearSearch()">&times;</span>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function clearSearch() {
+            document.getElementById('search').value = '';
+        }
+    </script>
+{% endblock %}
