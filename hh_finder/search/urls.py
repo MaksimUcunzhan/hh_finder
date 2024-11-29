@@ -1,9 +1,8 @@
 from django.urls import path
-
-from search.views import search
+from . import views
 
 app_name = 'search'
 
 urlpatterns = [
-    path('', search, name='search'),
+    path('', views.search_profession, name='search'),
 ]

@@ -1,20 +1,33 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
-{% block title %}Сайт{% endblock %}
+{% block css %}
+    <link href="{% static 'main/css/index.css'%}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-    <header>
-        <h1>Сайт</h1>
-        <nav>
-            <a href="{% url 'search:search' %}">Начать</a>
-            <a href="{% url 'users:login' %}">Войти</a>
-        </nav>
-    </header>
-    <section class="main-content">
-        <div class="main-text">
-            <h2>Какие навыки тебе нужны?</h2>
-            <p>Что нужно уметь, чтобы работать там, где хочешь? Узнай, какие ключевые навыки тебе нужно иметь, чтобы устроиться на работу мечты!</p>
-            <a href="{% url 'search:search' %}" class="button">Начать</a>
+    <section>
+<!--        <div class="alert alert-light text-center" role="alert">-->
+<!--            Информационное сообщение-->
+<!--        </div>-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 class="mt-5">Какие навыки тебе нужны?</h1>
+                <p>
+                    Что нужно уметь, чтобы работать там, где хочу?
+                    Давай посмотрим! Узнай, какие ключевые навыки тебе нужно иметь, чтобы устроиться на работу мечты!
+                </p>
+                <button id="start-purchase-btn" type="button" class="btn btn-lg">
+                    <a id="start-purchase-link" href="{% url 'search:search' %}">
+                        Начать
+                    </a>
+                </button>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}
+
+
+

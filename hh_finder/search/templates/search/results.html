@@ -1,0 +1,21 @@
+{% extends 'search/base.html' %}
+
+{% block title %}Результаты поиска{% endblock %}
+
+{% block content %}
+<section class="main-content">
+    <h2>Результаты поиска для профессии: {{ profession }}</h2>
+
+    <div class="chart-container">
+        <h3>Круговая диаграмма навыков</h3>
+        <img src="/{{ pie_chart_url }}" alt="Круговая диаграмма">
+    </div>
+
+    <div class="table-container">
+        <h3>Таблица ключевых навыков</h3>
+        <img src="/{{ table_url }}" alt="Таблица навыков">
+    </div>
+
+    <a href="{% url 'search:search' %}" class="btn btn-secondary mt-3">Новый поиск</a>
+</section>
+{% endblock %}

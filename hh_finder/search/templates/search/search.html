@@ -1,30 +1,71 @@
-{% extends 'search/base.html' %}
+{% extends 'main/base.html' %}
+{% load static %}
 
-{% block title %}Сайт{% endblock %}
+{% block css %}
+    <link href="{% static 'main/css/find.css' %}" rel="stylesheet">
+    <style>
+        /* Стили для индикатора загрузки */
+        #loading-indicator {
+            display: none; /* Скрываем индикатор по умолчанию */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: #007bff;
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3; /* Light gray */
+            border-top: 4px solid #007bff; /* Blue */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
-    <header>
-        <h1>Сайт</h1>
-        <nav>
-            <a href="{% url 'search:search' %}">Начать</a>
-            <a href="{% url 'users:login' %}">Войти</a>
-        </nav>
-    </header>
-    <section class="main-content">
-        <div class="search-container">
-            <h2>Поиск профессии:</h2>
-        </div>
-        <div class="search-container">
+
+<section class="main-content">
+    <div class="search-container">
+        <h2>Поиск профессии:</h2>
+    </div>
+    <div class="search-container">
+        <form id="search-form" method="post" action="{% url 'search:search' %}" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="search-box">
-                <input type="text" id="search" placeholder="Профессия">
+                <input type="text" id="search" name="profession" placeholder="Профессия" required>
                 <span class="clear-button" onclick="clearSearch()">&times;</span>
             </div>
-        </div>
-    </section>
+            <button type="submit" class="btn btn-primary mt-3">Искать</button>
+        </form>
+    </div>
+</section>
 
-    <script>
-        function clearSearch() {
-            document.getElementById('search').value = '';
-        }
-    </script>
+<!-- Индикатор загрузки -->
+<div id="loading-indicator">
+    <div class="spinner"></div>
+    <p>Загрузка данных... Пожалуйста, подождите.</p>
+</div>
+
+<script>
+    // Функция очистки поля поиска
+    function clearSearch() {
+        document.getElementById('search').value = '';
+    }
+
+    // Показываем индикатор загрузки при отправке формы
+    document.getElementById('search-form').addEventListener('submit', function () {
+        document.getElementById('loading-indicator').style.display = 'block';
+    });
+</script>
 {% endblock %}
